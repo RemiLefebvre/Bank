@@ -40,7 +40,7 @@ class Account{
   public function setId(int $id){
     $this->_id = (int) $id;
   }
-  public function setName($name){
+  public function setName(string $name){
     if (is_string($name) && strlen($name) <= 20){
       $this->_name = $name;
     }
@@ -49,21 +49,25 @@ class Account{
     $this->_solde = (int) $solde;
   }
 
+  // Add money methode
   public function addMoney(int $amount){
     if (($this->_solde + $amount) <= 1000) {
       $this->_solde += $amount;
+      return true;
     }
     else {
-      return "enought money";
+      return "enought money (max :1000)";
     }
   }
 
+  // Output money methode
   public function outputMoney(int $amount){
     if (($this->_solde - $amount) >= -20) {
       $this->_solde -= $amount;
+      return true;
     }
     else {
-      return "not enought money";
+      return "not enought money (max : -20)";
     }
   }
 

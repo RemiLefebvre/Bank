@@ -101,19 +101,32 @@ if (isset($_POST['transfertMoney']) && isset($_POST['amountTransfert']) && isset
     $amount=sercureXSS($_POST['amountTransfert']);
 
     // Ouput money on account
-    $soldeOutputMoneyAccount-=$amount;
+      // creation of outputMoneyAccount
     $outputMoneyAccount=new account(['solde'=>$soldeOutputMoneyAccount,'id'=>$idOutputMoneyAccount]);
-    $validator=$manager->update($outputMoneyAccount);
+
+      // use ouput methode
+    $validator=$outputMoneyAccount->outputMoney($amount);
 
     // if ouput money its ok
-    if ($validator) {
-      // Add money on account
+    if ($validator===true) {
+      // get addMoneyAccount on DDB
       $addMoneyAccount = $manager->get($idAddMoneyAccount);
-      $soldeAddMoneyAccount=$addMoneyAccount->solde();
+
       // add solde
-      $soldeAddMoneyAccount+=$amount;
-      $addMoneyAccount->setSolde($soldeAddMoneyAccount);
-      $manager->update($addMoneyAccount);
+      $validator=$addMoneyAccount->addMoney($amount);
+
+      // if addMoney money its ok
+      if ($validator===true) {
+        // update on DDB
+        $manager->update($outputMoneyAccount);
+        $manager->update($addMoneyAccount);
+      }
+      else {
+        $message="can't add money on account";
+      }
+    }
+    else {
+      $message="can't output money on account";
     }
   }
     // if input empty
