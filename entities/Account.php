@@ -9,7 +9,7 @@ class Account{
 
   protected $_id;
   protected $_name;
-  protected $_solde;
+  protected $_sold;
 
 
   public function __construct(array $donnees){
@@ -31,7 +31,7 @@ class Account{
   */
   public function id() { return $this->_id; }
   public function name() { return $this->_name; }
-  public function solde() { return $this->_solde; }
+  public function sold() { return $this->_sold; }
 
 
   /*
@@ -45,15 +45,15 @@ class Account{
       $this->_name = $name;
     }
   }
-  public function setSolde(int $solde){
-    $this->_solde = (int) $solde;
+  public function setsold(int $sold){
+    $this->_sold = (int) $sold;
   }
 
   // Add money methode
   public function addMoney(int $amount){
-    if (($this->_solde + $amount) <= 1000) {
-      $this->_solde += $amount;
-      return true;
+    if (($this->_sold + $amount) <= 1000) {
+      $this->_sold += $amount;
+      return "Success";
     }
     else {
       return "enought money (max :1000)";
@@ -62,9 +62,9 @@ class Account{
 
   // Output money methode
   public function outputMoney(int $amount){
-    if (($this->_solde - $amount) >= -20) {
-      $this->_solde -= $amount;
-      return true;
+    if (($this->_sold - $amount) >= -20) {
+      $this->_sold -= $amount;
+      return "Success";
     }
     else {
       return "not enought money (max : -20)";

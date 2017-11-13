@@ -19,7 +19,7 @@
     <div class="d-flex">
       <h5 class="w-25"><strong>ID</strong></h5>
       <h5 class="w-25"><strong>Name</strong></h5>
-      <h5 class="w-25"><strong>Solde</strong></h5>
+      <h5 class="w-25"><strong>sold</strong></h5>
       <h5 class="w-25"><strong>Options</strong></h5>
     </div>
 
@@ -30,11 +30,11 @@
           <div class="d-flex infos">
             <h5 class="w-25"><?php echo $account->id() ?></h5>
             <h5 class="w-25"><?php echo $account->name() ?></h5>
-            <h5 class="w-25"><?php echo $account->solde() ?></h5>
+            <h5 class="w-25"><?php echo $account->sold() ?></h5>
             <h5 class="w-25"><button type="button" name="button">USE</button></h5>
           </div>
           <form class="options" action="index.php" method="post">
-            <input type="hidden" name="solde" value="<?php echo $account->solde()?>">
+            <input type="hidden" name="sold" value="<?php echo $account->sold()?>">
             <input type="hidden" name="id" value="<?php echo $account->id()?>">
             <div class="row">
               <div class="option col-md-4 col-sm-12">

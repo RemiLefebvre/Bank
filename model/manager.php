@@ -34,7 +34,7 @@ class AccountManager{
   /*
   **Delete account in DBB
   */
-  public function delete($id){
+  public function delete(int $id){
     if (is_int($id)){
       $this->_db->query('DELETE FROM accounts WHERE id = '.$id);
     }
@@ -44,9 +44,9 @@ class AccountManager{
   **Get account
   */
   public function get($info){
-    $q = $this->_db->query('SELECT id, solde FROM accounts WHERE id ='.$info);
+    $q = $this->_db->query('SELECT id, sold FROM accounts WHERE id ='.$info);
     $donnees = $q->fetch(PDO::FETCH_ASSOC);
-    $account = new Account(["id" => $donnees['id'],"solde" => $donnees['solde']]);
+    $account = new Account(["id" => $donnees['id'],"sold" => $donnees['sold']]);
 
     return $account;
   }
@@ -57,9 +57,9 @@ class AccountManager{
   public function getList(){
     $listAccounts = [];
 
-    $q = $this->_db->query('SELECT id, name, solde FROM accounts');
+    $q = $this->_db->query('SELECT id, name, sold FROM accounts');
     while ($donnees = $q->fetch(PDO::FETCH_ASSOC)){
-      $listAccounts[] = new Account(["id" => $donnees['id'],"name" => $donnees['name'],"solde" => $donnees['solde']]);
+      $listAccounts[] = new Account(["id" => $donnees['id'],"name" => $donnees['name'],"sold" => $donnees['sold']]);
     }
     return $listAccounts;
   }
@@ -68,10 +68,10 @@ class AccountManager{
   **Update account
   */
   public function update(Account $account){
-    $q = $this->_db->prepare('UPDATE accounts SET solde = :solde WHERE id = :id');
+    $q = $this->_db->prepare('UPDATE accounts SET sold = :sold WHERE id = :id');
     $q->execute(array(
       'id'=>$account->id(),
-      'solde'=>$account->solde(),
+      'sold'=>$account->sold(),
     ));
     return true;
   }
