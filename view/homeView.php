@@ -2,10 +2,10 @@
 
 
 
-<?php if (isset($message)) {
-  echo $message;
-} ?>
 <main class="mt-5 container card">
+  <?php if (isset($message)) {
+    echo $message;
+  } ?>
   <form class="mb-5" action="index.php" method="post">
     <h3>Add account:</h3>
     <input type="text" name="name" placeholder="Name">
