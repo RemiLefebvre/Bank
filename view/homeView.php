@@ -30,7 +30,7 @@
           <div class="d-flex infos">
             <h5 class="w-25"><?php echo $account->id() ?></h5>
             <h5 class="w-25"><?php echo $account->name() ?></h5>
-            <h5 class="w-25"><?php echo $account->sold() ?></h5>
+            <h5 class="w-25 sold"><?php echo $account->sold() ?></h5>
             <h5 class="w-25"><button type="button" name="button">USE</button></h5>
           </div>
           <form class="options" action="index.php" method="post">

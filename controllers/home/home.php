@@ -52,7 +52,7 @@ if (isset($_POST['outputMoney']) AND isset($_POST['amountOutput']) AND isset($_P
     $id=sercureXSS($_POST['id']);
     $amount=sercureXSS($_POST['amountOutput']);
     $sold=sercureXSS($_POST['sold']);
-
+    
     // creation object outputMoneyAccount
     $outputMoneyAccount=new account(['sold'=>$sold,'id'=>$id]);
 
