@@ -1,11 +1,12 @@
 <?php
 require("entities/Account.php");
 require("model/manager.php");
+require("services/XSS.php");
 
 
 
 /*
-**Create Véhicule manager
+**Create Account manager
 */
 $manager = new AccountManager($db);
 
@@ -15,10 +16,13 @@ $manager = new AccountManager($db);
 */
 if (isset($_POST['addAccount']) AND isset($_POST['name'])) {
   if (!empty($_POST['name'])) {
+    // Security XSS
     $name=htmlspecialchars($_POST['name']);
     $addAccount= new Account(['name'=>$name]);
     $manager->add($addAccount);
   }
+  // if input empty
+    // if input empty
   else {
     $message="input empty";
   }
@@ -28,7 +32,7 @@ if (isset($_POST['addAccount']) AND isset($_POST['name'])) {
 **Supp account
 */
 if (isset($_POST['suppAccount'])) {
-  $id=htmlspecialchars($_POST['id']);
+  $id=sercureXSS($_POST['id']);
   $manager->delete($id);
 }
 
@@ -37,13 +41,15 @@ if (isset($_POST['suppAccount'])) {
 */
 if (isset($_POST['outputMoney']) AND isset($_POST['amountOutput']) AND isset($_POST['solde'])) {
   if (!empty($_POST['amountOutput']) AND !empty($_POST['solde'])){
-    $id=intval(htmlspecialchars($_POST['id']));
-    $amount=intval(htmlspecialchars($_POST['amountOutput']));
-    $solde=intval(htmlspecialchars($_POST['solde']));
+    // Security XSS
+    $id=sercureXSS($_POST['id']);
+    $amount=sercureXSS($_POST['amountOutput']);
+    $solde=sercureXSS($_POST['solde']);
     $solde-=$amount;
     $outputMoneyAccount=new account(['solde'=>$solde,'id'=>$id]);
     $manager->update($outputMoneyAccount);
   }
+    // if input empty
   else {
     $message="input empty";
   }
@@ -54,14 +60,16 @@ if (isset($_POST['outputMoney']) AND isset($_POST['amountOutput']) AND isset($_P
 */
 if (isset($_POST['addMoney']) AND isset($_POST['amountAdd']) AND isset($_POST['solde']) AND isset($_POST['id'])) {
   if (!empty($_POST['amountAdd'])){
-    $id=intval(htmlspecialchars($_POST['id']));
-    $amount=intval(htmlspecialchars($_POST['amountAdd']));
-    $solde=intval(htmlspecialchars($_POST['solde']));
+    // Security XSS
+    $id=sercureXSS($_POST['id']);
+    $amount=sercureXSS($_POST['amountAdd']);
+    $solde=sercureXSS($_POST['solde']);
     $solde+=$amount;
     $addMoneyAccount=new account(['solde'=>$solde,'id'=>$id]);
 
     $manager->update($addMoneyAccount);
   }
+    // if input empty
   else {
     $message="input empty";
   }
@@ -75,10 +83,10 @@ if (isset($_POST['addMoney']) AND isset($_POST['amountAdd']) AND isset($_POST['s
 if (isset($_POST['transfertMoney']) && isset($_POST['amountTransfert']) && isset($_POST['id']) && isset($_POST['idAddMoneyAccount']) && isset($_POST['solde'])){
   if (!empty($_POST['transfertMoney']) && !empty($_POST['amountTransfert']) && !empty($_POST['id']) && !empty($_POST['idAddMoneyAccount']) && !empty($_POST['solde'])){
     // Security XSS
-    $idAddMoneyAccount=intval(htmlspecialchars($_POST['idAddMoneyAccount']));
-    $idOutputMoneyAccount=intval(htmlspecialchars($_POST['id']));
-    $soldeOutputMoneyAccount=intval(htmlspecialchars($_POST['solde']));
-    $amount=intval(htmlspecialchars($_POST['amountTransfert']));
+    $idAddMoneyAccount=sercureXSS($_POST['idAddMoneyAccount']);
+    $idOutputMoneyAccount=sercureXSS($_POST['id']);
+    $soldeOutputMoneyAccount=sercureXSS($_POST['solde']);
+    $amount=sercureXSS($_POST['amountTransfert']);
 
     // Ouput money on account
     $soldeOutputMoneyAccount-=$amount;
@@ -96,6 +104,7 @@ if (isset($_POST['transfertMoney']) && isset($_POST['amountTransfert']) && isset
       $manager->update($addMoneyAccount);
     }
   }
+    // if input empty
   else {
     $message="input empty";
   }
