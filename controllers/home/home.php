@@ -18,11 +18,13 @@ if (isset($_POST['addAccount']) AND isset($_POST['name'])) {
   if (!empty($_POST['name'])) {
     // Security XSS
     $name=htmlspecialchars($_POST['name']);
+
+    // create addAccount object
     $addAccount= new Account(['name'=>$name]);
+
+    // add on DDB
     $manager->add($addAccount);
   }
-  // if input empty
-    // if input empty
   else {
     $message="input empty";
   }
@@ -32,7 +34,10 @@ if (isset($_POST['addAccount']) AND isset($_POST['name'])) {
 **Supp account
 */
 if (isset($_POST['suppAccount'])) {
+  // Security XSS
   $id=sercureXSS($_POST['id']);
+
+  // delete on DDB
   $manager->delete($id);
 }
 
@@ -45,7 +50,6 @@ if (isset($_POST['outputMoney']) AND isset($_POST['amountOutput']) AND isset($_P
     $id=sercureXSS($_POST['id']);
     $amount=sercureXSS($_POST['amountOutput']);
     $solde=sercureXSS($_POST['solde']);
-    // $solde-=$amount;
 
     // creation object outputMoneyAccount
     $outputMoneyAccount=new account(['solde'=>$solde,'id'=>$id]);
@@ -109,7 +113,7 @@ if (isset($_POST['transfertMoney']) && isset($_POST['amountTransfert']) && isset
 
     // if ouput money its ok
     if ($validator===true) {
-      // get addMoneyAccount on DDB
+      // get addMoneyAccount on DDB (object)
       $addMoneyAccount = $manager->get($idAddMoneyAccount);
 
       // add solde
