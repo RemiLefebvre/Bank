@@ -1,7 +1,7 @@
 <?php
 
 function sercureXSS($var){
-  $securised= intval(htmlspecialchars($var));;
+  $securised= (float) htmlspecialchars($var);
   return $securised;
 }
 

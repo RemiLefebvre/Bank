@@ -45,8 +45,15 @@ if (isset($_POST['outputMoney']) AND isset($_POST['amountOutput']) AND isset($_P
     $id=sercureXSS($_POST['id']);
     $amount=sercureXSS($_POST['amountOutput']);
     $solde=sercureXSS($_POST['solde']);
-    $solde-=$amount;
+    // $solde-=$amount;
+
+    // creation object outputMoneyAccount
     $outputMoneyAccount=new account(['solde'=>$solde,'id'=>$id]);
+
+    // use adding money methode
+    $message=$outputMoneyAccount->outputMoney($amount);
+
+    // update on DDB
     $manager->update($outputMoneyAccount);
   }
     // if input empty
@@ -64,13 +71,12 @@ if (isset($_POST['addMoney']) AND isset($_POST['amountAdd']) AND isset($_POST['s
     $id=sercureXSS($_POST['id']);
     $amount=sercureXSS($_POST['amountAdd']);
     $solde=sercureXSS($_POST['solde']);
-    // $solde+=$amount;
 
     // creation object addMoneyAccount
     $addMoneyAccount=new account(['solde'=>$solde,'id'=>$id]);
 
-    // Adding money methode
-    $addMoneyAccount->addMoney($amount);
+    // use adding money methode
+    $message=$addMoneyAccount->addMoney($amount);
 
     // update on DDB
     $manager->update($addMoneyAccount);

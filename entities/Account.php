@@ -58,5 +58,15 @@ class Account{
     }
   }
 
+  public function outputMoney(int $amount){
+    if (($this->_solde - $amount) >= -20) {
+      $this->_solde -= $amount;
+    }
+    else {
+      return "not enought money";
+    }
+  }
+
+
 }
  ?>
