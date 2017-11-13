@@ -64,9 +64,15 @@ if (isset($_POST['addMoney']) AND isset($_POST['amountAdd']) AND isset($_POST['s
     $id=sercureXSS($_POST['id']);
     $amount=sercureXSS($_POST['amountAdd']);
     $solde=sercureXSS($_POST['solde']);
-    $solde+=$amount;
+    // $solde+=$amount;
+
+    // creation object addMoneyAccount
     $addMoneyAccount=new account(['solde'=>$solde,'id'=>$id]);
 
+    // Adding money methode
+    $addMoneyAccount->addMoney($amount);
+
+    // update on DDB
     $manager->update($addMoneyAccount);
   }
     // if input empty
@@ -117,9 +123,9 @@ $accounts= $manager->getList();
 
 
 /*
-**Number of accounts
+**List of id accounts
 */
-$listIdAccounts= $manager->count();
+$listIdAccounts= $manager->listIdAccounts();
 
 include_once("view/homeView.php")
 

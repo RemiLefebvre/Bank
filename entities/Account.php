@@ -37,7 +37,7 @@ class Account{
   /*
   ** Setter
   */
-  public function setId($id){
+  public function setId(int $id){
     $this->_id = (int) $id;
   }
   public function setName($name){
@@ -45,8 +45,18 @@ class Account{
       $this->_name = $name;
     }
   }
-  public function setSolde($solde){
+  public function setSolde(int $solde){
     $this->_solde = (int) $solde;
   }
+
+  public function addMoney(int $amount){
+    if (($this->_solde + $amount) <= 1000) {
+      $this->_solde += $amount;
+    }
+    else {
+      return "enought money";
+    }
+  }
+
 }
  ?>

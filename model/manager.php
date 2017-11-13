@@ -2,8 +2,6 @@
 
 require("phpmyadmin.php");
 
-
-
 /*
 **Manager of Account class
 */
@@ -100,9 +98,7 @@ class AccountManager{
   /*
   **list Id accounts
   */
-  public function count(){
-    // $q = $this->_db->query('SELECT COUNT(*) FROM accounts')->fetchColumn();
-    // return $q;
+  public function listIdAccounts(){
 
     $listIdAccounts = [];
     $q = $this->_db->query('SELECT id FROM accounts');
