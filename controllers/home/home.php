@@ -59,6 +59,8 @@ if (isset($_POST['outputMoney']) AND isset($_POST['amountOutput']) AND isset($_P
 
     // update on DDB
     $manager->update($outputMoneyAccount);
+
+    $message="Success";
   }
     // if input empty
   else {
@@ -84,6 +86,8 @@ if (isset($_POST['addMoney']) AND isset($_POST['amountAdd']) AND isset($_POST['s
 
     // update on DDB
     $manager->update($addMoneyAccount);
+
+    $message="Success";
   }
     // if input empty
   else {
@@ -124,6 +128,8 @@ if (isset($_POST['transfertMoney']) && isset($_POST['amountTransfert']) && isset
         // update on DDB
         $manager->update($outputMoneyAccount);
         $manager->update($addMoneyAccount);
+
+        $message="success";
       }
       else {
         $message="can't add money on account";
@@ -149,6 +155,8 @@ $accounts= $manager->getList();
 **List of id accounts
 */
 $listIdAccounts= $manager->listIdAccounts();
+
+
 
 include_once("view/homeView.php")
 
